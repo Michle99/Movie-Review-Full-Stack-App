@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.movie.api.beans.Review;
 import com.movie.api.services.ReviewService;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,14 @@ public class ReviewController {
     @Autowired
     ReviewService reviewService;
 
-    
+    @GetMapping
+    public ResponseEntity<List<Review>> getAllReviews() {
+        return new ResponseEntity<List<Review>>(
+            reviewService.findAllReviews(),
+            HttpStatus.OK
+        ) ;
+    }
+
     @PostMapping
     public ResponseEntity<Review> createReview(@RequestBody Map<String, String> payload) {
         
@@ -33,7 +41,7 @@ public class ReviewController {
             reviewService.createReview(
                 payload.get("reviewBody"),
                 payload.get("imdbId")),
-                HttpStatus.CREATED
+                HttpStatus.OK
         );
     }
     
