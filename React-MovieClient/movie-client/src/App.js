@@ -2,6 +2,9 @@
 import './App.css';
 import api from "./clientAPI/axiosConfig";
 import {useState, useEffect} from "react";
+import Layout from './components/Layout';
+import { Routes, Route } from "react-router-dom";
+import Home from "./components/home/Home";
 
 function App() {
 
@@ -25,9 +28,10 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        movies clientAPI
-      </header>
+      <Routes>
+        <Route path="/" element={<Layout/>} />
+        <Route path="/home" element={<Home movies={movies}/>} />
+      </Routes>
     </div>
   );
 }
